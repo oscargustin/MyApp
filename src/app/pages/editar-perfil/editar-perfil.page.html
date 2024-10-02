@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+      defaultHref="/perfil" text="" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Editar perfil</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-input label="Nombre: " type="text" labelPlacement="floating" placeholder="Ingresar nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Apellidos: " type="text" labelPlacement="floating" placeholder="Ingresar apellidos"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Correo electrónico: " type="email" labelPlacement="floating" placeholder="Ingresar correo"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    <div style="text-align: center; padding-bottom: 30px;">
+      <ion-button (click)="cambiarDatos()" fill="solid" shape="round" color="success">
+        Confirmar cambios
+      </ion-button>
+    </div>
+  </ion-card>
+</ion-content>
