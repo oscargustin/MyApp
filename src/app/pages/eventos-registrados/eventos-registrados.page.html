@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
+
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button (click)="mostrarMenu()">
-        <ion-icon slot="end" name="menu-outline" color="dark"></ion-icon>
-      </ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button
+      defaultHref="/eventos" text="" color="primary"></ion-back-button>
     </ion-buttons>
-    <ion-title>Eventos</ion-title>
+    <ion-title>Mis eventos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,8 +19,8 @@
       Descripción con hora, fecha y ubicación
     </ion-card-content>
     <div style="text-align: center; padding-bottom: 20px;">
-      <ion-button (click)="registrarEvento()"shape="round">
-        Registrar evento
+      <ion-button (click)="codigoqr()" fill="solid" shape="round" color="primary">
+        Código QR
       </ion-button>
     </div>
   </ion-card>

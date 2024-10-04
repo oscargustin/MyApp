@@ -30,7 +30,19 @@ const routes: Routes = [
   {
     path: 'eventos',
     loadChildren: () => import('./pages/eventos/eventos.module').then( m => m.EventosPageModule)
-  }
+  },
+  {
+    path: 'registro-evento',
+    loadChildren: () => import('./pages/registro-evento/registro-evento.module').then( m => m.RegistroEventoPageModule)
+  },
+  {
+    path: 'codigo-qr',
+    loadChildren: () => import('./pages/codigo-qr/codigo-qr.module').then( m => m.CodigoQRPageModule)
+  },
+  {
+    path: 'eventos-registrados',
+    loadChildren: () => import('./pages/eventos-registrados/eventos-registrados.module').then( m => m.EventosRegistradosPageModule)
+  },
 ];
 
 @NgModule({

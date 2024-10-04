@@ -22,34 +22,34 @@ export class EventosPage implements OnInit {
   ngOnInit() { this.email = localStorage.getItem('email') || 'Usuario'; 
   }
 
-  recuperarPassword() {
-    this.router.navigate(['/recuperar-password']);
-  }
-
-  async cerrarSesion() {
+  async registrarEvento(){
     const alert = await this.alertcontroller.create({
-      mode: 'ios',
-      message: '¡Hasta pronto, ' + this.email + '!',
+      header: '¿Estás seguro de registrarte a este evento?',
       buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Registro de evento cancelado.');
+          },
+        },
         {
           text: 'OK',
           role: 'confirm',
           handler: () => {
-            this.limpiar();
-            this.menuController.close();
-            this.router.navigate(['/login']); 
+            console.log('Evento registrado con éxito.');
+            this.router.navigate(['/eventos-registrados'])
           },
         },
       ],
     });
-    await alert.present();
-  }
 
-  limpiar(){  
-    this.email="";
-  }
-  
-  mostrarMenu() {
+    await alert.present();
+}
+
+  mostrarMenu(){
     this.menuController.open('first');
   }
 }
+
+  
