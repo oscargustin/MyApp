@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'; 
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -29,6 +29,18 @@ export class AuthService {
         });
       })
     );
+  }
+  async login(email: string, password: string): Promise<any> {
+    const auth = getAuth();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      console.log(`Usuario autenticado: ${userCredential.user.email}`);
+      return { success: true, user: userCredential.user };
+    } catch (error: any) {
+      console.error('Error en login:', error);
+      return { success: false, message: error.code };
+    }
   }
 
   // Mostrar mensaje temporal

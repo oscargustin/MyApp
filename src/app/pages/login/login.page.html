@@ -15,8 +15,9 @@
           <ion-input label="Correo electrónico: " type="email" labelPlacement="floating" name="email" [(ngModel)]="email" placeholder="Ingrese su correo"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="Contraseña: " type="Password" labelPlacement="floating" placeholder="Ingrese su contraseña"></ion-input>
+          <ion-input type="password" label="Contraseña" label-placement="floating" fill="solid" placeholder="**********" [(ngModel)]="password"></ion-input>
         </ion-item>
+        
         <ion-button (click)="recuperarPassword()" fill="clear" style="font-size:x-small">
           Recuperar contraseña
         </ion-button>
@@ -26,7 +27,7 @@
       </ion-list>
     </ion-card-content>
     <div style="text-align: center; padding-bottom: 30px;">
-      <ion-button (click)="iniciarSesion()" fill="solid" shape="round" color="primary">
+      <ion-button (click)="onLogin()" fill="solid" shape="round" color="primary">
         Iniciar sesión
       </ion-button>
     </div>
