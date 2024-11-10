@@ -46,7 +46,9 @@ export class EventosPage implements OnInit {
 
     await alert.present();
 }
-
+  Alumno(){
+    this.router.navigate(['/registro-alumno'])
+  }
   mostrarMenu(){
     this.menuController.open('first');
   }

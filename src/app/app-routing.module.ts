@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'eventos-registrados',
     loadChildren: () => import('./pages/eventos-registrados/eventos-registrados.module').then( m => m.EventosRegistradosPageModule)
+  },  {
+    path: 'registro-alumno',
+    loadChildren: () => import('./pages/registro-alumno/registro-alumno.module').then( m => m.RegistroAlumnoPageModule)
   },
+
 ];
 
 @NgModule({

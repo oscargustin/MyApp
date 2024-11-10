@@ -22,7 +22,12 @@
       "es2018", 
       "dom"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "firebase/*": ["node_modules/firebase/*"],
+      "@angular/fire/*": ["node_modules/@angular/fire/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

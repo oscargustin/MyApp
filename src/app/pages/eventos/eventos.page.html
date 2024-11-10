@@ -1,27 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="end">
+
       <ion-button (click)="mostrarMenu()">
         <ion-icon slot="end" name="menu-outline" color="dark"></ion-icon>
       </ion-button>
+
     </ion-buttons>
-    <ion-title>Eventos</ion-title>
+
+    <ion-title>BIENVENIDOS</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card style="text-align: center;">
-    <ion-img src="assets/duoc_evento.jpg"></ion-img>
+  <ion-card>
+
     <ion-card-header>
-      <ion-card-title>Nombre evento</ion-card-title>
+      <ion-card-title><h3>Seleccione Ingreso</h3></ion-card-title>
     </ion-card-header>
+  
     <ion-card-content>
-      Descripción con hora, fecha y ubicación
+    
+        <ion-button (click)="registrarEvento()"shape="round">
+          <h2>Profesor</h2>
+        </ion-button>
+      
+        <ion-button (click)="Alumno()"shape="round">
+           <h2>Alumno</h2>
+        </ion-button>
+ 
     </ion-card-content>
-    <div style="text-align: center; padding-bottom: 20px;">
-      <ion-button (click)="registrarEvento()"shape="round">
-        Registrar evento
-      </ion-button>
-    </div>
+
   </ion-card>
 </ion-content>
