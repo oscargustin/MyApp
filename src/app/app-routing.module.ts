@@ -42,11 +42,32 @@ const routes: Routes = [
   {
     path: 'eventos-registrados',
     loadChildren: () => import('./pages/eventos-registrados/eventos-registrados.module').then( m => m.EventosRegistradosPageModule)
-  },  {
+  },
+  {
     path: 'registro-alumno',
     loadChildren: () => import('./pages/registro-alumno/registro-alumno.module').then( m => m.RegistroAlumnoPageModule)
   },
+  {
+    path: 'inicio-alumno',
+    loadChildren: () => import('./pages/inicio-alumno/inicio-alumno.module').then( m => m.InicioAlumnoPageModule)
+  },
+  {
+    path: 'registrar-asistencia',
+    loadChildren: () => import('./pages/registrar-asistencia/registrar-asistencia.module').then( m => m.RegistrarAsistenciaPageModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./pages/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+  },
+  {
+    path: 'log-out',
+    loadChildren: () => import('./pages/log-out/log-out.module').then( m => m.LogOutPageModule)
+  },  {
+    path: 'perfil-popover',
+    loadChildren: () => import('./pages/perfil-popover/perfil-popover.module').then( m => m.PerfilPopoverPageModule)
+  },
 
+  
 ];
 
 @NgModule({

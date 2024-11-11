@@ -28,15 +28,18 @@ async onLogin() {
   
 
   if (result.success) {
-    this.router.navigate(['/eventos-registrados']);
-  //   if (this.email.endsWith('@profesorduoc.com')) {
-  //     this.router.navigate(['/eventos-registrados']);
-  //   } else if (this.email.endsWith('@alumnoduoc.com')) {
-  //     // this.router.navigate(['/inicio']);
-  //   }
-  // } else {
-  //   this.handleLoginError(result.message);
+    if (this.email.includes('@profesorduoc.com')) {
+      this.router.navigate(['/eventos-registrados']);
+    } else if (this.email.includes('@duocuc.com')) {
+      this.router.navigate(['/inicio-alumno']);
+    } else {
+      // Navegación o mensaje por defecto si no se cumple ninguna de las anteriores
+      this.router.navigate(['/inicio']);
+    }
+  } else {
+    this.handleLoginError(result.message);
   }
+
 }
 handleLoginError(errorCode: string) {
     console.error('Error de inicio de sesión:', errorCode); 

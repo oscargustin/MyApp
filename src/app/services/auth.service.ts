@@ -53,6 +53,18 @@ export class AuthService {
     });
     toast.present();
   }
+  async logOut() {
+  try {
+    const auth = getAuth(); // Obtener la instancia de autenticación
+    await signOut(auth);
+    console.log('Usuario ha cerrado sesión');
+    this.router.navigate(['/login']); // Redirige a la página de inicio de sesión
+  } catch (error: any) {
+    console.error('Error al cerrar sesión:', error);
+  }
+}
+
+  
 
   // Manejo de errores
   handleError(errorCode: string) {
@@ -71,3 +83,4 @@ export class AuthService {
     }
   }
 }
+
