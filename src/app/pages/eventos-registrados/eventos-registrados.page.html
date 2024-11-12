@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
-
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button
-      defaultHref="/eventos" text="" color="primary"></ion-back-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="mostrarMenu()">
+        <ion-icon slot="end" name="menu-outline" color="dark"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>Mis eventos</ion-title>
+    <ion-title>Generar Código QR</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,15 +13,22 @@
   <ion-card style="text-align: center;">
     <ion-img src="assets/duoc_evento.jpg"></ion-img>
     <ion-card-header>
-      <ion-card-title>Nombre evento</ion-card-title>
+      <ion-card-title>Generar QR para Asignatura</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      Descripción con hora, fecha y ubicación
+
+    <ion-card-content class="ion-no-padding">
+      <ion-item>
+        <ion-label>Asignatura</ion-label>
+        <ion-select [(ngModel)]="asignaturaSeleccionada" placeholder="Selecciona Asignatura">
+          <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura.id">{{ asignatura.nombre }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div style="text-align: center; padding-top: 20px;">
+        <ion-button (click)="generarQR()" fill="solid" shape="round" color="primary">
+          Generar Código QR
+        </ion-button>
+      </div>
     </ion-card-content>
-    <div style="text-align: center; padding-bottom: 20px;">
-      <ion-button (click)="codigoqr()" fill="solid" shape="round" color="primary">
-        Código QR
-      </ion-button>
-    </div>
+    
   </ion-card>
 </ion-content>

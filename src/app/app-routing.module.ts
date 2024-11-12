@@ -44,10 +44,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/eventos-registrados/eventos-registrados.module').then( m => m.EventosRegistradosPageModule)
   },
   {
-    path: 'registro-alumno',
-    loadChildren: () => import('./pages/registro-alumno/registro-alumno.module').then( m => m.RegistroAlumnoPageModule)
-  },
-  {
     path: 'inicio-alumno',
     loadChildren: () => import('./pages/inicio-alumno/inicio-alumno.module').then( m => m.InicioAlumnoPageModule)
   },
@@ -62,7 +58,8 @@ const routes: Routes = [
   {
     path: 'log-out',
     loadChildren: () => import('./pages/log-out/log-out.module').then( m => m.LogOutPageModule)
-  },  {
+  },
+  {
     path: 'perfil-popover',
     loadChildren: () => import('./pages/perfil-popover/perfil-popover.module').then( m => m.PerfilPopoverPageModule)
   },

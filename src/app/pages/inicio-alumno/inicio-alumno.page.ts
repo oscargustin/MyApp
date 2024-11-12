@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Platform, AlertController, PopoverController } from '@ionic/angular';
+import { Platform, AlertController, PopoverController, MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { NavigationService } from 'src/app/services/Navigation.Service';
-import { Itemlist } from 'src/app/interfaces/itemlist';
+import { NavigationService } from 'src/app/services/navigation.service';
+import { Itemlist } from 'src/app/Interfaces/itemlist';
 import { PerfilPopoverPage } from '../perfil-popover/perfil-popover.page';
 
 @Component({
@@ -18,6 +18,7 @@ export class InicioAlumnoPage implements OnInit, OnDestroy {
     private popoverController: PopoverController,
     private alertController: AlertController,
     private authService: AuthService,
+    private menuController: MenuController,
     private navigationService: NavigationService
   ) {}
 
@@ -47,6 +48,9 @@ export class InicioAlumnoPage implements OnInit, OnDestroy {
     await popover.present();
   }
   
+  mostrarMenu(){
+    this.menuController.open('first');
+  }
 
   vinculos: Itemlist[] = [
     { ruta: '/asistencia', titulo: 'Asistencia', icono: 'walk' },

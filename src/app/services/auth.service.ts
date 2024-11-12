@@ -14,7 +14,11 @@ export class AuthService {
     private toastController: ToastController,
     private firestore: Firestore  // Inyecta Firestore
   ) {}
-
+  getCurrentUserUid(): string | null {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    return user ? user.uid : null; // Retorna el UID si el usuario está autenticado, de lo contrario null
+  }
   // Registrar usuario y guardar información adicional en Firestore
   register(email: string, password: string) {
     const auth = getAuth();  // Obtener la instancia de autenticación
@@ -63,8 +67,6 @@ export class AuthService {
     console.error('Error al cerrar sesión:', error);
   }
 }
-
-  
 
   // Manejo de errores
   handleError(errorCode: string) {

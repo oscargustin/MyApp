@@ -5,7 +5,7 @@ import { CodigoQRPage } from './codigo-qr.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'asignatura_id',
     component: CodigoQRPage
   }
 ];

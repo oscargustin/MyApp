@@ -1,27 +1,27 @@
-<ion-header>
-  <ion-toolbar color="secondary" style="--border-bottom: none;">
+<ion-header [translucent]="true">
+  <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="openPopover($event)">
-        <ion-icon name="person" style="color: white;"></ion-icon>
+      <ion-button (click)="mostrarMenu()">
+        <ion-icon slot="end" name="menu-outline" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content color="tertiary">
+<ion-content color="">
   <div id="header"></div>
 
-  <ion-card color="primary" class="card">
+  <ion-card color="dark" class="card">
     <ion-card-header class="ion-text-center">
       <ion-card-title>Bienvenido Alumno!</ion-card-title>
     </ion-card-header>
   </ion-card>
 
   <div *ngFor="let item of vinculos">
-    <ion-card color="primary" class="card-item">
+    <ion-card color="dark" class="card-item">
       <ion-card-content>
-        <ion-item color="primary" routerLink="{{item.ruta}}">
+        <ion-item color="dark" routerLink="{{item.ruta}}">
           <ion-label class="item-title">{{item.titulo}}</ion-label>
           <ion-icon slot="end" name="{{item.icono}}"></ion-icon>
         </ion-item>
