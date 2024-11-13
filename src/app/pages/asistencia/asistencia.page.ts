@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AsignaturaService } from 'src/app/services/asignatura.service';
 
 @Component({
   selector: 'app-asistencia',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./asistencia.page.scss'],
 })
 export class AsistenciaPage implements OnInit {
+  asignaturas: any[] = [];
 
-  constructor() { }
+  constructor(private asignaturaService: AsignaturaService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.asignaturas = await this.asignaturaService.obtenerAsignaturasPorUsuario();
   }
-
 }

@@ -42,18 +42,19 @@ export class InicioAlumnoPage implements OnInit, OnDestroy {
   async openPopover(event: Event) {
     const popover = await this.popoverController.create({
       component: PerfilPopoverPage,
-      event: event,
-      translucent: true,
+      event: event, // El evento para posicionar el popover
+      translucent: true // Hace que el popover tenga fondo translúcido
     });
     await popover.present();
   }
+  
   
   mostrarMenu(){
     this.menuController.open('first');
   }
 
   vinculos: Itemlist[] = [
-    { ruta: '/asistencia', titulo: 'Asistencia', icono: 'walk' },
-    { ruta: '/registrar-asistencia', titulo: 'Registrar Asistencia', icono: 'qr-code-outline' },
+    { ruta: '/', titulo: 'Asistencia', icono: 'accessibility-outline' },
+    { ruta: '/registrar-asistencia', titulo: 'Registrar Asistencia', icono: 'barcode-outline' },
   ];
 }

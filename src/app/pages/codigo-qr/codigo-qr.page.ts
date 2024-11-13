@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CodigoQRPage implements OnInit {
   asignaturaId!: string;
-  profesorId!: string;
+  usuario_id!: string;
   codigoQR!: string;
   qrCodeDataUrl!: string;
 
@@ -28,7 +28,7 @@ export class CodigoQRPage implements OnInit {
 
   ngOnInit() {
     this.asignaturaId = this.route.snapshot.paramMap.get('asignatura_id') || '';
-    this.profesorId = this.authService.getCurrentUserUid() || ''; // Obtén el UID del profesor
+    this.usuario_id = this.authService.getCurrentUserUid() || ''; // Obtén el UID del profesor
     this.generarCodigoQR();
   }
   async presentAlertGoBack() {
@@ -39,7 +39,7 @@ export class CodigoQRPage implements OnInit {
         {
           text: 'No',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'warning',
           handler: () => {
             console.log('Cancelado');
           },
@@ -89,7 +89,7 @@ export class CodigoQRPage implements OnInit {
       asignatura_id: this.asignaturaId,
       asistentes: [],
       'fecha-hora': fechaHora,
-      profesor_id: this.profesorId,
+      usuario_id: this.usuario_id,
       codigo: codigoUnico
     });
 

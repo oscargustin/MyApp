@@ -27,20 +27,20 @@ export class RegistroPage implements OnInit {
   async registrar() {
     // Validación de campos vacíos
     if (!this.nombre || !this.apellidos || !this.nombreUsuario || !this.email || !this.password || !this.confirmPassword) {
-      this.showToast('Por favor, rellene todos los campos.', 'secondary');
+      this.showToast('Por favor, rellene todos los campos.', 'warning');
       return;
     }
   
     // Validación de que las contraseñas coincidan
     if (this.password !== this.confirmPassword) {
-      this.showToast('Las contraseñas no coinciden.', 'secondary');
+      this.showToast('Las contraseñas no coinciden.', 'warning');
       return;
     }
   
     // Validación del formato del correo electrónico
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailPattern.test(this.email)) {
-      this.showToast('Por favor, ingrese un correo electrónico válido.', 'secondary');
+      this.showToast('Por favor, ingrese un correo electrónico válido.', 'warning');
       return;
     }
   

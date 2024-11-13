@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { RegistrarAsistenciaPageRoutingModule } from './registrar-asistencia-routing.module';
-
+import { ComponentsModule } from './../../components/components.module';
 import { RegistrarAsistenciaPage } from './registrar-asistencia.page';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { RegistrarAsistenciaPage } from './registrar-asistencia.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistrarAsistenciaPageRoutingModule
+    RegistrarAsistenciaPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [RegistrarAsistenciaPage]
 })

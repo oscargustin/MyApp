@@ -28,20 +28,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/recuperar-password/recuperar-password.module').then( m => m.RecuperarPasswordPageModule)
   },
   {
-    path: 'eventos',
-    loadChildren: () => import('./pages/eventos/eventos.module').then( m => m.EventosPageModule)
-  },
-  {
-    path: 'registro-evento',
-    loadChildren: () => import('./pages/registro-evento/registro-evento.module').then( m => m.RegistroEventoPageModule)
-  },
-  {
     path: 'codigo-qr',
     loadChildren: () => import('./pages/codigo-qr/codigo-qr.module').then( m => m.CodigoQRPageModule)
-  },
-  {
-    path: 'eventos-registrados',
-    loadChildren: () => import('./pages/eventos-registrados/eventos-registrados.module').then( m => m.EventosRegistradosPageModule)
   },
   {
     path: 'inicio-alumno',
@@ -63,6 +51,16 @@ const routes: Routes = [
     path: 'perfil-popover',
     loadChildren: () => import('./pages/perfil-popover/perfil-popover.module').then( m => m.PerfilPopoverPageModule)
   },
+  {
+    path: 'inicio-profe',
+    loadChildren: () => import('./pages/inicio-profe/inicio-profe.module').then( m => m.InicioProfePageModule)
+  },
+  {
+    path: 'generar-qrprofe',
+    loadChildren: () => import('./pages/generar-qrprofe/generar-qrprofe.module').then( m => m.GenerarQrprofePageModule)
+  },
+
+
 
   
 ];

@@ -1,5 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+<ion-buttons slot="start">
+  <ion-button (click)="volver()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
     <ion-buttons slot="end">
       <ion-button (click)="mostrarMenu()">
         <ion-icon slot="end" name="menu-outline" color="dark"></ion-icon>
@@ -9,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="content-padding">
   <ion-card style="text-align: center;">
     <ion-img src="assets/duoc_evento.jpg"></ion-img>
     <ion-card-header>
@@ -29,6 +35,6 @@
         </ion-button>
       </div>
     </ion-card-content>
-    
   </ion-card>
 </ion-content>
+

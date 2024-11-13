@@ -24,7 +24,7 @@ export class PerfilPopoverPage {
         {
           text: 'No',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'warning',
           handler: () => {
             console.log('Cierre de sesión cancelado');
           }

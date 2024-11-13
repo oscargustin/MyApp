@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CodigoQRPageRoutingModule } from './codigo-qr-routing.module';
-
+import { ComponentsModule } from './../../components/components.module';
 import { CodigoQRPage } from './codigo-qr.page';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { CodigoQRPage } from './codigo-qr.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CodigoQRPageRoutingModule
+    CodigoQRPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [CodigoQRPage]
 })

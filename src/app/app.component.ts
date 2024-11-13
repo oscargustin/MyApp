@@ -20,11 +20,6 @@ export class AppComponent {
       redirecTo: '/perfil'
     },
     {
-      icon: 'bookmark-sharp',
-      name: 'Mis eventos',
-      redirecTo: '/eventos-registrados'
-    },
-    {
       icon: 'log-out-sharp',
       name: 'Cerrar sesión',
       redirecTo: '/login'

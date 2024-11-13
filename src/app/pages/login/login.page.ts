@@ -29,7 +29,7 @@ async onLogin() {
 
   if (result.success) {
     if (this.email.includes('@profesorduoc.com')) {
-      this.router.navigate(['/eventos-registrados']);
+      this.router.navigate(['/inicio-profe']);
     } else if (this.email.includes('@duocuc.com')) {
       this.router.navigate(['/inicio-alumno']);
     } else {
@@ -45,13 +45,13 @@ handleLoginError(errorCode: string) {
     console.error('Error de inicio de sesión:', errorCode); 
     switch (errorCode) {
       case 'auth/missing-password':
-        this.showToast('Ingrese una contraseña.', 'secondary');
+        this.showToast('Ingrese una contraseña.', 'warning');
         break;
       case 'auth/invalid-email':
-        this.showToast('Correo inválido.', 'secondary');
+        this.showToast('Correo inválido.', 'warning');
         break;
       default:
-        this.showToast('Credenciales invalidas.', 'secondary');
+        this.showToast('Credenciales invalidas.', 'warning');
         break;
     }
   }

@@ -4,14 +4,17 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import QRCode from 'qrcode';
+import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
-  selector: 'app-eventos-registrados',
-  templateUrl: './eventos-registrados.page.html',
-  styleUrls: ['./eventos-registrados.page.scss'],
+  selector: 'app-generar-qrprofe',
+  templateUrl: './generar-qrprofe.page.html',
+  styleUrls: ['./generar-qrprofe.page.scss'],
 })
-export class EventosRegistradosPage implements OnInit {
-  asignaturas: any[] = ['lenguaje', 'historia','historia','historia'];
+export class GenerarQrprofePage implements OnInit {
+  asignaturas: any[] = [];
   asignaturaSeleccionada!: string;
   ubicacion!: string;
   fecha!: string;
@@ -21,7 +24,9 @@ export class EventosRegistradosPage implements OnInit {
     private router: Router,
     private menuController: MenuController,
     private firestore: Firestore,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastController: ToastController,
+    private navCtrl: NavController
   ) {}
 
   async ngOnInit() {
@@ -30,6 +35,9 @@ export class EventosRegistradosPage implements OnInit {
 
   mostrarMenu() {
     this.menuController.open('first');
+  }
+  volver() {
+    this.navCtrl.back(); // Navega a la página anterior
   }
 
   async cargarAsignaturas() {
@@ -40,25 +48,37 @@ export class EventosRegistradosPage implements OnInit {
       nombre: documento.data()['nombre'],
     }));
   }
+  async showToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'top'
+    });
+    toast.present();
+  }
 
   async generarQR() {
-    const profesorId = this.authService.getCurrentUserUid();
+    const usuario_id = this.authService.getCurrentUserUid();
     if (!this.asignaturaSeleccionada) {
-      console.error('Por favor selecciona una asignatura.');
+       this.showToast('Por favor selecciona una asignatura.', 'warning')
+      //console.error('Por favor selecciona una asignatura.');
       return;
     }
   
     const timestamp = new Date().getTime(); // Generar un timestamp único
     const claseRef = doc(this.firestore, `clase/${this.asignaturaSeleccionada}-${timestamp}`);
-  
+    console.log(`Timestamp: ${timestamp} - ClaseRef ID: ${claseRef.id} - usuario_id: ${usuario_id} - asignatura: ${this.asignaturaSeleccionada}`);
+
     await setDoc(claseRef, {
       asignatura_id: this.asignaturaSeleccionada,
-      profesor_id: profesorId,
+      usuario_id: usuario_id,
       timestamp: new Date(), // Guarda la fecha/hora actual en Firestore
     });
   
     const codigoQR = `${this.asignaturaSeleccionada}-${timestamp}`;
     this.qrCodeDataUrl = await QRCode.toDataURL(codigoQR);
+    
   }
   
 }

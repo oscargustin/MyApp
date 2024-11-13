@@ -74,13 +74,13 @@ export class AuthService {
 
     switch (errorCode) {
       case 'auth/email-already-in-use':
-        this.showToast('El correo ya está registrado.', 'secondary');
+        this.showToast('El correo ya está registrado.', 'warning');
         break;
       case 'auth/weak-password':
-        this.showToast('La contraseña es muy débil. Escoja una más segura.', 'secondary');
+        this.showToast('La contraseña es muy débil. Escoja una más segura.', 'warning');
         break;
       default:
-        this.showToast('Error inesperado.', 'secondary');
+        this.showToast('Error inesperado.', 'warning');
         break;
     }
   }
