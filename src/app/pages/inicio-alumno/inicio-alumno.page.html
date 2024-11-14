@@ -28,4 +28,13 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <ion-button expand="full" (click)="scanQRCode()">Escanear Código QR</ion-button>
+
+    <!-- Enlaces existentes para navegación -->
+    <ion-list>
+      <ion-item *ngFor="let vinculo of vinculos" [routerLink]="vinculo.ruta">
+        <ion-icon [name]="vinculo.icono"></ion-icon>
+        <ion-label>{{ vinculo.titulo }}</ion-label>
+      </ion-item>
+    </ion-list>
 </ion-content>

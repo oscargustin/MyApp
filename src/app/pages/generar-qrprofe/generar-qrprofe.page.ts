@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, doc, setDoc, collection, getDocs } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import QRCode from 'qrcode';
-import { ToastController } from '@ionic/angular';
-import { NavController } from '@ionic/angular';
-
+import { QrCodeService } from 'src/app/services/qr-code.service'; // Importa el servicio QR
 
 @Component({
   selector: 'app-generar-qrprofe',
@@ -26,7 +23,8 @@ export class GenerarQrprofePage implements OnInit {
     private firestore: Firestore,
     private authService: AuthService,
     private toastController: ToastController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private qrCodeService: QrCodeService // Inyecta el servicio QR
   ) {}
 
   async ngOnInit() {
@@ -36,6 +34,7 @@ export class GenerarQrprofePage implements OnInit {
   mostrarMenu() {
     this.menuController.open('first');
   }
+
   volver() {
     this.navCtrl.back(); // Navega a la página anterior
   }
@@ -48,6 +47,7 @@ export class GenerarQrprofePage implements OnInit {
       nombre: documento.data()['nombre'],
     }));
   }
+
   async showToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message,
@@ -61,12 +61,11 @@ export class GenerarQrprofePage implements OnInit {
   async generarQR() {
     const usuario_id = this.authService.getCurrentUserUid();
     if (!this.asignaturaSeleccionada) {
-       this.showToast('Por favor selecciona una asignatura.', 'warning')
-      //console.error('Por favor selecciona una asignatura.');
+      this.showToast('Por favor selecciona una asignatura.', 'warning');
       return;
     }
   
-    const timestamp = new Date().getTime(); // Generar un timestamp único
+    const timestamp = new Date().getTime(); // Genera un timestamp único
     const claseRef = doc(this.firestore, `clase/${this.asignaturaSeleccionada}-${timestamp}`);
     console.log(`Timestamp: ${timestamp} - ClaseRef ID: ${claseRef.id} - usuario_id: ${usuario_id} - asignatura: ${this.asignaturaSeleccionada}`);
 
@@ -75,10 +74,16 @@ export class GenerarQrprofePage implements OnInit {
       usuario_id: usuario_id,
       timestamp: new Date(), // Guarda la fecha/hora actual en Firestore
     });
-  
+
     const codigoQR = `${this.asignaturaSeleccionada}-${timestamp}`;
-    this.qrCodeDataUrl = await QRCode.toDataURL(codigoQR);
     
+    // Usa el servicio QrCodeService para generar el QR
+    try {
+      this.qrCodeDataUrl = await this.qrCodeService.generateQRCode(codigoQR);
+      this.showToast('Código QR generado exitosamente.', 'success');
+    } catch (error) {
+      console.error('Error al generar el código QR:', error);
+      this.showToast('Error al generar el código QR.', 'danger');
+    }
   }
-  
 }

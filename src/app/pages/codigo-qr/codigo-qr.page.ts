@@ -6,6 +6,7 @@ import { QrCodeService } from 'src/app/services/qr-code.service';
 import { NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 
 @Component({
   selector: 'app-codigo-qr',

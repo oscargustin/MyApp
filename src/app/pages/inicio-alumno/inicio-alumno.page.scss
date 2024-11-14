@@ -1,0 +1,19 @@
+/* Ocultar todos los elementos mientras se usa el escáner */
+body.barcode-scanner-active {
+    visibility: hidden;
+    --background: transparent;
+    --ion-background-color: transparent;
+  }
+  
+  /* Mostrar solo el modal del escáner */
+  .barcode-scanner-modal {
+    visibility: visible;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .barcode-scanner-modal {
+      --background: transparent;
+      --ion-background-color: transparent;
+    }
+  }
+  

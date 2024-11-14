@@ -34,7 +34,18 @@
           Generar Código QR
         </ion-button>
       </div>
+      
     </ion-card-content>
+    <div *ngIf="qrCodeDataUrl">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Código QR Generado</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img [src]="qrCodeDataUrl" alt="Código QR" />
+        </ion-card-content>
+      </ion-card>
+    </div>
   </ion-card>
 </ion-content>
 
