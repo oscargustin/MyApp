@@ -44,7 +44,7 @@ export class GenerarQrprofePage implements OnInit {
     const query = await getDocs(asignaturasFireStore);
     this.asignaturas = query.docs.map(documento => ({
       id: documento.id,
-      nombre: documento.data()['nombre'],
+      asignatura_id: documento.data()['asignatura_id'],
     }));
   }
 
