@@ -40,21 +40,31 @@ export class AsignaturaService {
     return asignaturas;
   }
   
-  async obtenerAsignaturaPorId(asignaturaId: string) {
-    const asignaturasRef = collection(this.db, 'asignatura');
-    const q = query(asignaturasRef, where('asignatura_id', '==', asignaturaId)); // Busca por el campo `asignatura_id`
-    const querySnapshot = await getDocs(q);
-  
-    if (querySnapshot.empty) {
-      throw new Error('No existe la asignatura'); // Si no se encuentra ningún documento
+  async obtenerAsignaturasPorUid() {
+    const uid = this.authService.getCurrentUserUid(); // Obtener el UID del usuario actual
+    console.log(uid);
+    if (!uid) {
+      console.log("No se encontró el UID del usuario.");
+      return []; // Retorna un array vacío si no hay UID
     }
-  
-    let asignaturaData;
-    querySnapshot.forEach((doc) => {
-      asignaturaData = { id: doc.id, ...doc.data() }; // Obtiene el primer documento encontrado
-    });
-  
-    return asignaturaData; // Retorna la información de la asignatura
+
+    const asignaturasRef = collection(this.db, 'asignatura');
+    console.log('Referencia de la colección Asignaturas:', asignaturasRef);
+    const q = query(asignaturasRef, where('uid', '==', uid)); // Filtrar por UID
+
+    try {
+      const querySnapshot = await getDocs(q); // Ejecuta la consulta
+      const asignaturas: any[] = [];
+
+      querySnapshot.forEach((doc) => {
+        asignaturas.push({ id: doc.id, ...doc.data() }); // Agrega los documentos al array
+      });
+
+      return asignaturas;
+    } catch (error) {
+      console.error("Error al obtener asignaturas: ", error);
+      return []; // Si hay error, retornamos un array vacío
+    }
   }
   // Método para obtener los nombres de los alumnos
   async obtenerAlumnosPorUids(uids: string[]) {

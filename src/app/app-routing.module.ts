@@ -58,7 +58,11 @@ const routes: Routes = [
   {
     path: 'generar-qrprofe',
     loadChildren: () => import('./pages/generar-qrprofe/generar-qrprofe.module').then( m => m.GenerarQrprofePageModule)
+  },  {
+    path: 'asignaturasprofe',
+    loadChildren: () => import('./pages/asignaturasprofe/asignaturasprofe.module').then( m => m.AsignaturasprofePageModule)
   },
+
 
 
 

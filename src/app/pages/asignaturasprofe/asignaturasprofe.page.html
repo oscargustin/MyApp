@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Asignaturas del Profesor</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="volver()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- Aquí hacemos un loop sobre las asignaturas -->
+      <ion-col *ngFor="let asignatura of asignaturas" size="12" size-md="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ asignatura.nombre }}</ion-card-title>
+            <ion-card-subtitle>Asignatura ID: {{ asignatura.asignatura_id }}</ion-card-subtitle>
+            <ion-card-subtitle>Aula: {{ asignatura.aula }}</ion-card-subtitle>
+            <ion-card-subtitle>Horario: {{ asignatura.horario }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Mensaje cuando no hay asignaturas -->
+  <ion-list *ngIf="asignaturas.length === 0">
+    <ion-item lines="none">
+      <ion-label class="ion-text-center">No tienes asignaturas asignadas</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

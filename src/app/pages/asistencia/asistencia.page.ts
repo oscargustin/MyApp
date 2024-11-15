@@ -12,6 +12,6 @@ export class AsistenciaPage implements OnInit {
   constructor(private asignaturaService: AsignaturaService) {}
 
   async ngOnInit() {
-    this.asignaturas = await this.asignaturaService.obtenerAsignaturasPorUsuario();
+    //this.asignaturas = await this.asignaturaService.obtenerAsignaturas();
   }
 }

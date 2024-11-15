@@ -26,7 +26,7 @@
       <ion-item>
         <ion-label>Asignatura</ion-label>
         <ion-select [(ngModel)]="asignaturaSeleccionada" placeholder="Selecciona Asignatura">
-          <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura.id">{{ asignatura.nombre }}</ion-select-option>
+          <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura.id">{{ asignatura.asignatura_id }}</ion-select-option>
         </ion-select>
       </ion-item>
       <div style="text-align: center; padding-top: 20px;">
@@ -34,7 +34,7 @@
           Generar Código QR
         </ion-button>
       </div>
-      
+
     </ion-card-content>
     <div *ngIf="qrCodeDataUrl">
       <ion-card>

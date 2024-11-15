@@ -1,9 +1,9 @@
 <app-cabecera></app-cabecera>
 
-<ion-content color="tertiary">
+<ion-content color="">
   <div id="header"></div>
 
-  <ion-card color="primary" class="card">
+  <ion-card color="dark" class="card">
     <ion-card-header class="ion-text-center">
       <ion-card-title>Asistencia</ion-card-title>
     </ion-card-header>
@@ -12,7 +12,6 @@
   <ion-card *ngFor="let item of asignaturas">
     <ion-card-header>
       <ion-card-subtitle>{{ item.asignatura_id }}</ion-card-subtitle>
-      <ion-card-title>{{ item.nombre }}</ion-card-title>
       <ion-card-subtitle>Aula: {{ item.aula }}</ion-card-subtitle>
       <ion-card-subtitle>Horario: {{ item.horario }}</ion-card-subtitle>
     </ion-card-header>
