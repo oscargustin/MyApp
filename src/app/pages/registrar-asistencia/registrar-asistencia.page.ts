@@ -17,9 +17,9 @@ export class RegistrarAsistenciaPage implements OnInit {
   latitude: number | null = null;
   longitude: number | null = null;
   locationMessage: string | null = null; // Variable para mostrar mensaje de ubicación
-  //Ubicacion DUOC: { lat: -36.79538244183323, lng: -73.06152573267023 }; 
+  //Ubicacion DUOC: { lat: -36.79509935876236, lng: -73.06234311608544 }; 
   //Ubicacion Casa Seba: { lat: -36.60909853022575, lng: -72.96350965358964 };
-  readonly institutionCoords = { lat: -36.60909853022575, lng: -72.96350965358964 };
+  readonly institutionCoords = { lat: -36.79509935876236, lng: -73.06234311608544 };
   readonly allowedDistance = 120; // Rango en metros
 
   constructor(
@@ -51,6 +51,8 @@ export class RegistrarAsistenciaPage implements OnInit {
     const position = await this.checkLocation(); // Obtener ubicación al presionar el botón
     this.locationMessage = position ? `Ubicación actual: ${this.latitude?.toFixed(6)}, ${this.longitude?.toFixed(6)}` : 'No se pudo obtener la ubicación.';
 
+    
+
     // Verificar si el usuario está en el área permitida
     if (!position) {
       this.presentAlert(
@@ -71,7 +73,8 @@ export class RegistrarAsistenciaPage implements OnInit {
     const codigoQR = barcodes[0].rawValue;
     const alumnoId = this.authService.getCurrentUserUid();
 
-    if (!codigoQR || codigoQR.length !== 5) {
+    if (!codigoQR) {
+      this.presentAlert('QR inválido', codigoQR.length.toString());
       this.presentAlert('QR inválido', 'El código QR escaneado no es válido.');
       return;
     }
@@ -127,6 +130,8 @@ export class RegistrarAsistenciaPage implements OnInit {
       
       // Mensaje de ubicación
       this.locationMessage = `Ubicación actual: ${this.latitude.toFixed(6)}, ${this.longitude.toFixed(6)}`;
+
+      
       
       const distance = this.calculateDistance(
         this.institutionCoords.lat,
@@ -134,7 +139,7 @@ export class RegistrarAsistenciaPage implements OnInit {
         this.latitude,
         this.longitude
       );
-  
+      
       return distance <= this.allowedDistance; // Retorna true si está dentro del rango permitido
     } catch (error) {
       console.error('Error obteniendo la ubicación:', error);

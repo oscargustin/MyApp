@@ -51,7 +51,7 @@ handleLoginError(errorCode: string) {
         this.showToast('Correo inválido.', 'warning');
         break;
       default:
-        this.showToast('Credenciales invalidas.', 'warning');
+        this.showToast('Credenciales invalidas.' + errorCode, 'warning');
         break;
     }
   }

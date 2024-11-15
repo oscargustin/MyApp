@@ -106,7 +106,7 @@ export class InicioAlumnoPage implements OnInit, OnDestroy {
 
   // Lista de enlaces para navegación (ya existente)
   vinculos: Itemlist[] = [
-    { ruta: '/', titulo: 'Asistencia', icono: 'accessibility-outline' },
+    { ruta: '/asistencia', titulo: 'Asistencia', icono: 'accessibility-outline' },
     { ruta: '/registrar-asistencia', titulo: 'Registrar Asistencia', icono: 'barcode-outline' },
   ];
 }
