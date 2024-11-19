@@ -19,9 +19,10 @@ export class InicioAlumnoPage implements OnInit, OnDestroy {
     private navigationService: NavigationService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() { 
     this.navigationService.setCurrentPage('inicio');
-
+  
+  
     // Escuchar el evento de retroceso y guardar la suscripción
     this.platform.backButton.subscribeWithPriority(10, () => {
       if (this.navigationService.isHomePage()) {
@@ -30,10 +31,10 @@ export class InicioAlumnoPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Desuscribirse del evento de retroceso cuando se abandona InicioPage
+    if (this.backButtonSubscription){
     this.backButtonSubscription.unsubscribe();
   }
-
+  }
   // Método para abrir el popover (ya existente)
   async openPopover(event: Event) {
     const popover = await this.popoverController.create({

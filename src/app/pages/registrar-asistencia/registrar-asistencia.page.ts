@@ -17,10 +17,8 @@ export class RegistrarAsistenciaPage implements OnInit {
   latitude: number | null = null;
   longitude: number | null = null;
   locationMessage: string | null = null; // Variable para mostrar mensaje de ubicación
-  //Ubicacion DUOC: { lat: -36.79509935876236, lng: -73.06234311608544 }; 
-  //Ubicacion Casa Seba: { lat: -36.60909853022575, lng: -72.96350965358964 };
   readonly institutionCoords = { lat: -36.79509935876236, lng: -73.06234311608544 };
-  readonly allowedDistance = 120; // Rango en metros
+  readonly allowedDistance = 500; // Rango en metros
 
   constructor(
     private alertController: AlertController,
