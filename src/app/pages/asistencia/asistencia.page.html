@@ -1,19 +1,29 @@
 <app-cabecera></app-cabecera>
 
-<ion-content color="">
-  <div id="header"></div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistencias Locales</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-card color="dark" class="card">
-    <ion-card-header class="ion-text-center">
-      <ion-card-title>Asistencia</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+<ion-content>
+  <ion-button expand="block" (click)="mostrarAsistenciasLocales()">
+    Cargar Asistencias
+  </ion-button>
 
-  <ion-card *ngFor="let item of asignaturas">
-    <ion-card-header>
-      <ion-card-subtitle>{{ item.asignatura_id }}</ion-card-subtitle>
-      <ion-card-subtitle>Aula: {{ item.aula }}</ion-card-subtitle>
-      <ion-card-subtitle>Horario: {{ item.horario }}</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+  <!-- Mostrar asistencias locales -->
+  <ion-list *ngIf="asistencias && asistencias.length > 0">
+    <ion-item *ngFor="let asistencia of asistencias">
+      <ion-label>
+        <h2>Clase ID: {{ asistencia.claseId }}</h2>
+        <p>Alumno ID: {{ asistencia.alumnoId }}</p>
+        <p>Fecha: {{ asistencia.fecha | date: 'short' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Mensaje si no hay asistencias -->
+  <ion-text color="medium" *ngIf="!asistencias || asistencias.length === 0">
+    No hay asistencias registradas localmente.
+  </ion-text>
 </ion-content>

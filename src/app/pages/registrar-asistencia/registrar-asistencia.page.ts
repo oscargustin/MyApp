@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { Firestore, doc, getDoc, updateDoc, arrayUnion } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-registrar-asistencia',
@@ -24,7 +25,8 @@ export class RegistrarAsistenciaPage implements OnInit {
     private alertController: AlertController,
     private firestore: Firestore,
     private authService: AuthService,
-    private componentsModule:ComponentsModule
+    private componentsModule:ComponentsModule,
+    private storageService:StorageService
     
   ) {}
 
@@ -96,8 +98,20 @@ export class RegistrarAsistenciaPage implements OnInit {
       asistentes: arrayUnion(alumnoId)
     });
 
-    this.presentAlert('Asistencia registrada', 'Tu asistencia ha sido registrada exitosamente.');
+    const asistenciaLocal = {
+      claseId: codigoQR,
+      fecha: new Date().toISOString(),
+      alumnoId,
+    };
+
+    await this.storageService.addToArray('asistencias', asistenciaLocal);
+
+    this.presentAlert(
+      'Asistencia registrada',
+      'Tu asistencia ha sido registrada exitosamente.'
+    );
   }
+
 
   async requestPermissions(): Promise<boolean> {
     const { camera } = await BarcodeScanner.requestPermissions();

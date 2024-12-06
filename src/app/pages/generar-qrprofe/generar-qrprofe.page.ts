@@ -66,7 +66,7 @@ export class GenerarQrprofePage implements OnInit {
       return;
     }
   
-    const timestamp = new Date().getTime(); // Genera un timestamp único
+    const timestamp = new Date().getTime();
     const claseRef = doc(this.firestore, `clase/${this.asignaturaSeleccionada}-${timestamp}`);
     console.log(`Timestamp: ${timestamp} - ClaseRef ID: ${claseRef.id} - usuario_id: ${usuario_id} - asignatura: ${this.asignaturaSeleccionada}`);
 
