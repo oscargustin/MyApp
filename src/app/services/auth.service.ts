@@ -46,10 +46,9 @@ import { StorageService } from './storage.service';
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
   
-        // Guardar el UID del usuario autenticado
-        await this.storageService.saveData('user',user.uid);
+        // Delegar almacenamiento al StorageService
+        await this.storageService.saveData('user', { uid: user.uid, email: user.email,  });
   
-        console.log(`Usuario autenticado: ${user.email}`);
         return { success: true, user };
       } catch (error: any) {
         console.error('Error en login:', error);

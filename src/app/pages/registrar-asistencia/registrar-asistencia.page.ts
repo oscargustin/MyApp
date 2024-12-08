@@ -104,8 +104,6 @@ export class RegistrarAsistenciaPage implements OnInit {
       alumnoId,
     };
 
-    await this.storageService.addToArray('asistencias', asistenciaLocal);
-
     this.presentAlert(
       'Asistencia registrada',
       'Tu asistencia ha sido registrada exitosamente.'

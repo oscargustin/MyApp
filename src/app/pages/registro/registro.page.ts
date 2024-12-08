@@ -25,7 +25,6 @@ export class RegistroPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.registrarData();
 }
 
 async registrarData() {
@@ -53,49 +52,41 @@ async registrarData() {
       return;
     }
 
-    // Guardar los datos en el almacenamiento local
-    const registro = {
-      nombre: this.nombre,
-      apellidos: this.apellidos,
-      nombreUsuario: this.nombreUsuario,
-      email: this.email,
-      password: this.password, // Aunque puedes no almacenar contraseñas en almacenamiento local
-    };
-    
-    console.log('Guardando datos de registro:', registro);
-
-    // Guardar el objeto con los datos en el almacenamiento local
-    await this.storageService.saveData('registro', registro);
-    console.log('Datos guardados en el almacenamiento local.');
-
     // Intentar registrar usuario
     try {
       console.log('Intentando registrar usuario con correo:', this.email);
-      const result = await this.authService.register(this.email, this.password, this.nombre, this.apellidos, this.nombreUsuario).toPromise();
-  
+      const result = await this.authService.register(
+        this.email, this.password, this.nombre, this.apellidos, this.nombreUsuario
+      ).toPromise();
+    
       if (result) {
+        const user = {
+          email: this.email,
+          password: this.password, // Considera cifrarla
+          nombre: this.nombre,
+          apellidos: this.apellidos,
+          nombreUsuario: this.nombreUsuario
+        };
+        JSON.stringify(user);
+    
+        await this.storageService.saveData('user', user);
         this.showToast('¡Registro exitoso!', 'success');
-        if (this.email.includes('@profesorduoc.com')) {
-          this.router.navigate(['/inicio-profe']);
-        } else if (this.email.includes('@duocuc.com')) {
-          this.router.navigate(['/inicio-alumno']);
-        } // Si el registro fue exitoso
-        this.router.navigate(['/login']);
+    
+        // Redirige según el tipo de usuario
+        const redirectRoute = this.email.includes('@profesorduoc.com') 
+          ? '/inicio-profe' 
+          : this.email.includes('@duocuc.com') 
+            ? '/inicio-alumno' 
+            : '/login';
+    
+        this.router.navigate([redirectRoute], {
+          queryParams: { email: this.email, password: this.password },
+        });
       }
     } catch (error: any) {
-      // Imprime el error completo en la consola
       console.error('Error al registrar usuario:', error);
-      
-      // Llama al manejador de errores con el código de error
-      this.authService.handleError(error.code);
-      
-      // Si el error tiene detalles adicionales, imprímelos también
-      if (error.message) {
-        console.error('Mensaje de error:', error.message);
-      }
-      if (error.stack) {
-        console.error('Stack trace:', error.stack);
-      }
+      const errorMsg = error.message || 'Ocurrió un error durante el registro.';
+      this.showToast(errorMsg, 'danger');
     }
   }
 

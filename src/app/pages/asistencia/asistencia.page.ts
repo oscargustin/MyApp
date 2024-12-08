@@ -18,23 +18,23 @@ export class AsistenciaPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // Obtener el UID del usuario logueado
-    this.userUid = await this.authService.getCurrentUserUid();
+  //   // Obtener el UID del usuario logueado
+  //   this.userUid = await this.authService.getCurrentUserUid();
 
-    if (this.userUid) {
-      await this.mostrarAsistenciasLocales(); // Cargar asistencias filtradas
-    } else {
-      console.log('No se encontró UID del usuario logueado.');
-    }
-  }
+  //   if (this.userUid) {
+  //     await this.mostrarAsistenciasLocales(); // Cargar asistencias filtradas
+  //   } else {
+  //     console.log('No se encontró UID del usuario logueado.');
+  //   }
+  // }
 
-  async mostrarAsistenciasLocales() {
-    const asistencias = await this.storageService.getArray('asistencias');
-    console.log('Asistencias locales:', asistencias);
+  // async mostrarAsistenciasLocales() {
+  //   const asistencias = await this.storageService.getArray('asistencias');
+  //   console.log('Asistencias locales:', asistencias);
 
-    // Filtrar las asistencias según el UID del usuario logueado
-    this.filteredAsistencias = asistencias.filter(
-      (asistencia) => asistencia.alumnoId === this.userUid
-    );
+  //   // Filtrar las asistencias según el UID del usuario logueado
+  //   this.filteredAsistencias = asistencias.filter(
+  //     (asistencia) => asistencia.alumnoId === this.userUid
+  //   );
   }
 }

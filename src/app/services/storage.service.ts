@@ -1,51 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  private storageReady: Promise<Storage>; 
+  private storageReady: Promise<Storage>;
 
-  constructor(private storage: Storage, private firestore: AngularFirestore) {
-    // La creación del almacenamiento es una promesa que resuelve un objeto de tipo Storage
-    this.storageReady = this.storage.create(); 
-  }
-  async addToArray(key: string, value: any): Promise<void> {
-    const existing = (await this.storage.get(key)) || [];
-    existing.push(value);
-    await this.storage.set(key, existing);
+  constructor(private storage: Storage) {
+    this.storageReady = this.storage.create();
   }
 
-  async getArray(key: string): Promise<any[]> {
-    return (await this.storage.get(key)) || [];
-  }
-
-  async clearStorage(): Promise<void> {
-    await this.storage.clear();
-  }
-
-
-  // Guardar en localStorage
+  // Guardar datos
   async saveData(key: string, data: any): Promise<void> {
-    const storage = await this.storageReady; 
-    await storage.set(key, data);
+    const jsonData = JSON.stringify(data); // Serializar datos a JSON
+    localStorage.setItem(key, jsonData);
   }
+  
 
-  // Obtener desde localStorage
+  // Obtener datos
   async getData(key: string): Promise<any> {
-    const storage = await this.storageReady; 
-    return storage.get(key);
+    const jsonData  =  localStorage.getItem(key);
+    return jsonData  ? JSON.parse(jsonData ) : null; // Deserializar si los datos existen
+  }
+  
+
+  // Eliminar datos
+  async removeData(key: string): Promise<void> {
+    const storage = await this.storageReady;
+    await storage.remove(key);
   }
 
-  // Guardar datos en Firebase (cuando haya conexión a internet)
-  async saveDataToFirebase(collection: string, id: string, data: any): Promise<void> {
-    this.firestore.collection(collection).doc(id).set(data);
-  }
-
-  // Recuperar datos de Firebase
-  getDataFromFirebase(collection: string, id: string) {
-    return this.firestore.collection(collection).doc(id).get();
+  // Limpiar todo el almacenamiento
+  async clearStorage(): Promise<void> {
+    const storage = await this.storageReady;
+    await storage.clear();
   }
 }
