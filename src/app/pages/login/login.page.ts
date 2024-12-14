@@ -5,6 +5,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { StorageService} from 'src/app/services/storage.service';  // Asegúrate de importar tu servicio de almacenamiento
 import { Network } from '@capacitor/network';
 import { ActivatedRoute } from '@angular/router';
+import { Firestore, doc, setDoc,  } from '@angular/fire/firestore';
+import { getAuth, signOut } from '@angular/fire/auth';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,10 +22,10 @@ export class LoginPage {
     private router: Router,
     private toastController: ToastController,
     private storageService: StorageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private firestore:Firestore
     // Inyecta el servicio de almacenamiento
   ) {}
-//AÑADI CHECKNETWORKSTATUS AL ONINIT, DENTRO DE LA SUB
 ngOnInit() {
   this.route.queryParams.subscribe((params) => {
     if (params['email'] && params['password']) {
@@ -89,14 +92,40 @@ async onLogin() {
   }
 }
 
+async syncUserData() {
+  try {
+    const storedUserData = await this.storageService.getData('user');
+    if (storedUserData && await this.checkNetworkStatus()) {
+      const userRef = doc(this.firestore, 'users', storedUserData.uid);
+      await setDoc(userRef, storedUserData, { merge: true }); // Sincronizar con Firebase
+      console.log('Datos sincronizados con Firebase');
+    }
+  } catch (error) {
+    console.error('Error al sincronizar datos:', error);
+  }
+}
+
+// Logout sin eliminar datos de sesión:
+async onLogout() {
+  try {
+    // No eliminar los datos, solo marcar como no autenticado
+    await this.storageService.removeData('user');
+    const auth = getAuth();
+    await signOut(auth); // Cerrar sesión en Firebase
+    this.router.navigate(['/login']);
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+}
+
 // Helper para redirigir al usuario
 private redirectUserBasedOnEmail(email: string) {
-  if (email.includes('@profesorduoc.com')) {
+  if (email.includes('@profesorduoc.cl')) {
     this.router.navigate(['/inicio-profe']);
-  } else if (email.includes('@duocuc.com')) {
+  } else if (email.includes('@duocuc.cl')) {
     this.router.navigate(['/inicio-alumno']);
   } else {
-    this.router.navigate(['/inicio']);
+    this.showToast('El correo no pertenece al dominio', 'danger');
   }
 }
 
@@ -115,31 +144,6 @@ private redirectUserBasedOnEmail(email: string) {
           break;
       }
     }
-
-  // async loginOffline() {
-  //   // Intenta obtener los datos almacenados de registro
-  //   const registro = await this.storageService.getData('registro');
-  //   // Verifica si los datos están almacenados
-  //   if (!registro) {
-  //     this.showToast('No se encontraron datos almacenados de registro.', 'warning');
-  //     return;
-  //   }
-
-  //   // Verifica si el correo y la contraseña coinciden con los datos almacenados
-  //   if (registro.success) {
-  //     if (this.email.includes('@profesorduoc.com')) {
-  //       this.router.navigate(['/inicio-profe']);
-  //     } else if (this.email.includes('@duocuc.com')) {
-  //       this.router.navigate(['/inicio-alumno']);
-  //     } else {
-  //       // Navegación o mensaje por defecto si no se cumple ninguna de las anteriores
-  //       this.router.navigate(['/inicio']);
-  //     }
-  //   } else {
-  //     this.handleLoginError(registro.message);
-  //   }
-  // }
-
   // Mostrar mensaje temporal
   async showToast(message: string, color: string) {
     const toast = await this.toastController.create({

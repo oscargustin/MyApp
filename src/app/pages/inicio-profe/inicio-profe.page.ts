@@ -108,6 +108,6 @@ export class InicioProfePage implements OnInit {
       titulo: 'Asignaturas',
       icono: 'book-outline'
     },
-    { ruta: '/generar-qrprofe', titulo: 'Generar Qr Para Asistencia', icono: 'qr-code-outline' },
+    { ruta: '/generar-qrprofe', titulo: 'Asistencia en línea', icono: 'qr-code-outline' },
 ];
 }
