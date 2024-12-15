@@ -1,0 +1,34 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100%; /* Ocupa el alto completo */
+  }
+  
+  .input-box {
+    width: 90%;
+    max-width: 400px;
+    margin: 10px 0; /* Espaciado entre cada bloque */
+  }
+  
+  .input-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-align: left; /* Alineado a la izquierda */
+  }
+  
+  .input-data {
+    font-size: 18px;
+    color: #fff; /* Color de la información */
+    padding: 10px;
+    background: #333; /* Fondo oscuro para el bloque */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px ; /* Borde sutil */
+  }
+  
+  .button-container {
+    margin-top: 20px; /* Espaciado entre la última caja y el botón */
+    text-align: center;
+  }
+  

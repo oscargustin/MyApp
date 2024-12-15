@@ -27,14 +27,14 @@ export class InicioProfePage implements OnInit {
 
     ngOnInit() {
       this.navigationService.setCurrentPage('inicio');
-      // this.cargarDatosAlumno();
+      this.cargarDatosAlumno();
   
-      // // Escuchar el evento de retroceso y guardar la suscripción
-      // this.platform.backButton.subscribeWithPriority(10, () => {
-      //   if (this.navigationService.isHomePage()) {
-      //     // Acciones específicas al presionar retroceso en la página de inicio
-      //   }
-      // });
+      // Escuchar el evento de retroceso y guardar la suscripción
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        if (this.navigationService.isHomePage()) {
+          // Acciones específicas al presionar retroceso en la página de inicio
+        }
+      });
     }
   
     ngOnDestroy() {
@@ -43,10 +43,9 @@ export class InicioProfePage implements OnInit {
       }
     }
   
-    // async cargarDatosAlumno() {
+    async cargarDatosAlumno() {
     //   try {
-    //     const userUid = await this.storageService.getData('user');
-    //     console.log('UID recuperado:', userUid); // Verificar si el UID está correcto
+    //     const userUid = await this.storageService.getData('user'); 
   
     //     if (!userUid) {
     //       console.error('UID no encontrado en el almacenamiento local');
@@ -81,7 +80,7 @@ export class InicioProfePage implements OnInit {
     //     console.error('Error al cargar datos del usuario:', error);
     //     this.nombre = 'Error al cargar datos';
     //   }
-    // }
+    }
   goBack() {
     this.navCtrl.back(); 
   }
@@ -108,6 +107,8 @@ export class InicioProfePage implements OnInit {
       titulo: 'Asignaturas',
       icono: 'book-outline'
     },
-    { ruta: '/generar-qrprofe', titulo: 'Asistencia en línea', icono: 'qr-code-outline' },
+    { ruta: '/generar-qrprofe',
+       titulo: 'Asistencia en línea',
+        icono: 'qr-code-outline' },
 ];
 }

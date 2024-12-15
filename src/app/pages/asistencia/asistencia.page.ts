@@ -8,6 +8,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./asistencia.page.scss'],
 })
 export class AsistenciaPage implements OnInit {
+mostrarAsistenciasLocales() {
+throw new Error('Method not implemented.');
+}
   asistencias: any[] = [];
   filteredAsistencias: any[] = [];
   userUid: string | null = null;

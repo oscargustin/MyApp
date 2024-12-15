@@ -7,12 +7,13 @@
         <ion-title>RegistrApp</ion-title>
       </ion-toolbar>
     </ion-header>
+
     <ion-content>
       <ion-list>
         <ion-menu-toggle *ngFor="let menu of opciones">
-          <ion-item [routerLink]="menu.redirecTo" detail="true">
+          <ion-item [routerLink]="menu.redirecTo" (click)="menu.name === 'Cerrar sesión' ? logOut() : null" detail="true">
             <ion-icon slot="start" [name]="menu.icon"></ion-icon>
-            <ion-label>{{menu.name}}</ion-label>
+            <ion-label>{{ menu.name }}</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
@@ -20,4 +21,5 @@
   </ion-menu>
 
   <ion-router-outlet id="main"></ion-router-outlet>
+
 </ion-app>

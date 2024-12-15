@@ -1,10 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-      defaultHref="/" text="" color="primary"></ion-back-button>
+      <ion-back-button defaultHref="/" text="" color="primary"></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,26 +12,36 @@
     <ion-card-header>
       <ion-card-title style="text-align: center;">Mis datos</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-input label="Nombre de usuario: " type="text" [readonly]="true"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Nombre: " type="text" [readonly]="true"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Apellidos: " type="text" [readonly]="true"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Correo electrónico: " type="email" [readonly]="true"></ion-input>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-    <div style="text-align: center; padding-bottom: 30px;">
-      <ion-button (click)="editarPerfil()" fill="solid" shape="round" color="warning">
-        Editar perfil
-      </ion-button>
-    </div>
+
+      <div class="form-container">
+       
+        <div class="input-box">
+          <label class="input-label">Nombre de Usuario:</label>
+          <div class="input-data">{{ this.nombreUsuario }}</div>
+        </div>
+
+        <div class="input-box">
+          <label class="input-label">Nombre:</label>
+          <div class="input-data">{{ this.nombre }}</div>
+        </div>
+
+        <div class="input-box">
+          <label class="input-label">Apellido:</label>
+          <div class="input-data">{{ this.apellidos }}</div>
+        </div>
+        
+        <div class="input-box">
+          <label class="input-label">Correo electrónico:</label>
+          <div class="input-data">{{ this.email }}</div>
+        </div>
+        <div style="text-align: center; padding-bottom: 30px;">
+          <ion-button (click)="updateProfile()" fill="solid" shape="round" color="warning">
+            Editar perfil
+          </ion-button>
+        </div>
+         
+      </div>
+
+    
   </ion-card>
 </ion-content>

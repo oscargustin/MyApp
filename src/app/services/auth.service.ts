@@ -7,6 +7,7 @@
 import { StorageService } from './storage.service';
 import { Network } from '@capacitor/network';
 
+
   @Injectable({
     providedIn: 'root',
   })
@@ -37,18 +38,19 @@ import { Network } from '@capacitor/network';
             apellidos: apellidos,  
             nombreUsuario: nombreUsuario,  
             createdAt: new Date()  
-          }); 
+          }).then(() => userCredential); // Devuelve el objeto userCredential
         })
       );
     }
     
-  async login(email: string, password: string): Promise<any> {
+  // Método login en authService
+async login(email: string, password: string): Promise<any> {
   const auth = getAuth();
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Obtener datos del usuario desde Firestore
+    // Obtener los datos del usuario desde Firestore
     const userDocRef = doc(this.firestore, 'users', user.uid);
     const docSnapshot = await getDoc(userDocRef);
     const userData = docSnapshot.data();
@@ -63,7 +65,7 @@ import { Network } from '@capacitor/network';
         nombreUsuario: userData['nombreUsuario']
       };
 
-      await this.storageService.saveData('user', userInfo);
+      await this.storageService.saveData(user.uid, userInfo); // Guardar el usuario actual
     }
     return { success: true, user };
   } catch (error: any) {
@@ -72,6 +74,7 @@ import { Network } from '@capacitor/network';
     return { success: false, message: error.code };
   }
 }
+
 
 
     async isEmailRegistered(email: string): Promise<boolean> {

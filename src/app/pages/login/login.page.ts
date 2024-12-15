@@ -73,7 +73,6 @@ async onLogin() {
       const storedUserData = await this.storageService.getData('user');
       console.log('Datos recuperados de localStorage:', storedUserData);
 
-      
       if (storedUserData) {
         const storedUser = storedUserData; // Validar si la estructura coincide
         if (storedUser.email === this.email && storedUser.password === this.password) {
@@ -91,6 +90,7 @@ async onLogin() {
     }
   }
 }
+
 
 async syncUserData() {
   try {
